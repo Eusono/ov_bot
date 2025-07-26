@@ -61,10 +61,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> If no `requirements.txt` exists yet, install:
-```bash
-pip install -U discord.py
-```
+> Make sure you're using the Python virtual environment before running this.
 
 ### 4. Configure the Bot
 
@@ -100,7 +97,7 @@ Restart=always
 
 ---
 
-## 🧾 Notes
+## 📟 Notes
 
 - Secrets and config values are stored in `config.py`, which is excluded via `.gitignore`
 - Persistent data is saved to `clan_bank.json`
