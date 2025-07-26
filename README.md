@@ -12,9 +12,6 @@ A Discord bot built for the RuneScape clan **Odin's Valhalla**, with features ta
   - Auto-messages users entering designated channels like `#the-door`
 - 💰 **Clan Bank System**
   - `/clanbank add`, `/clanbank remove`, and logging via JSON-backed storage
-- 💸 **RS3 Finances**
-  - Fetch Grand Exchange prices
-  - View item trends in Discord
 - 🔀 **Random Commands**
   - Fun utilities like dice rolls, random number generators, etc.
 - ⚙️ **Admin Utilities**
