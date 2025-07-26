@@ -113,7 +113,7 @@ Restart=always
 
 ## 📜 License
 
-MIT License (or whatever license you prefer — none declared yet)
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
