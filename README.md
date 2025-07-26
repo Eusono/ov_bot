@@ -28,6 +28,7 @@ ov_bot/
 ├── example.config.py       # Sample config to copy/edit
 ├── clan_bank.json          # JSON data store for clan banking
 ├── reminders.json          # (Reserved) for scheduled reminders
+├── requirements.txt        # Dependencies
 ├── cogs/                   # All feature modules
 │   ├── admin.py
 │   ├── example.py
@@ -61,8 +62,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> Make sure you're using the Python virtual environment before running this.
-
 ### 4. Configure the Bot
 
 Copy the config example:
@@ -80,6 +79,8 @@ Edit `config.py` to include your:
 
 ## 🚀 Running the Bot
 
+### Option A: Run Manually
+
 From the project root:
 
 ```bash
@@ -87,17 +88,54 @@ source .venv/bin/activate
 python ov_bot.py
 ```
 
-Or use systemd like on the production server:
+### Option B: Run as a System Service
+
+#### 1. Move the Bot
+
+```bash
+sudo mkdir -p /opt/ovbot
+sudo cp -r ~/projects/github/Eusono/ov_bot/* /opt/ovbot/
+cd /opt/ovbot
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+#### 2. Create a Dedicated User
+
+```bash
+sudo useradd -r -s /bin/false ovbot
+sudo chown -R ovbot:ovbot /opt/ovbot
+```
+
+#### 3. Example systemd Service File
+
 ```ini
+[Unit]
+Description=Odin's Valhalla Discord Bot
+After=network.target
+
 [Service]
 WorkingDirectory=/opt/ovbot
 ExecStart=/opt/ovbot/.venv/bin/python /opt/ovbot/ov_bot.py
 Restart=always
+User=ovbot
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Save as `/etc/systemd/system/ovbot.service`, then run:
+
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl enable ovbot
+sudo systemctl start ovbot
 ```
 
 ---
 
-## 📟 Notes
+## 🧾 Notes
 
 - Secrets and config values are stored in `config.py`, which is excluded via `.gitignore`
 - Persistent data is saved to `clan_bank.json`
@@ -113,5 +151,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 🙌 Credits
 
-Created and maintained by @Eusono
+Created and maintained by @Eusono  
 Built with ❤️ for the Odin's Valhalla community.
